@@ -148,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
         int iteration = 0;
         Point point;
         boolean isPoint1 = true;
+        boolean flag = true;
         while(y1 >= p || y2 <= p) {
             point = isPoint1 ? p1 : p2;
             double delta = isPoint1 ? (p - y1) : (p - y2);
@@ -162,16 +163,20 @@ public class MainActivity extends AppCompatActivity {
 
             if (iteration >= iterations) {
                 result = "Too much iterations!\n";
+                flag = false;
                 break;
             }
 
             double currentTime = System.currentTimeMillis();
             if (currentTime - startTime >= time * 1000) {
                 result = "Reached deadline time!\n";
+                flag = false;
                 break;
             }
         }
-        result += "w1 = " + ((double) Math.round(w1 * 100) / 100) + "; w2 = " + ((double) Math.round(w2 * 100) / 100);
+        if (flag) {
+            result += "w1 = " + ((double) Math.round(w1 * 100) / 100) + "; w2 = " + ((double) Math.round(w2 * 100) / 100) + "\nIterations = " + iteration;
+        }
         return result;
     }
 }
